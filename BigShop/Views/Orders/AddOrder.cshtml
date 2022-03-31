@@ -1,0 +1,81 @@
+﻿@model CreateOrderVM
+
+<head>
+    <title>Add Order</title>
+</head>
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>Оформления заказа</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container" style="margin-top:30px;margin-bottom:30px">
+    <form asp-action="AddOrder" method="post">
+      <div class="row">
+        <div class="col-md-6">
+          <label class="" asp-for="UserName"></label>
+          <span class="text-danger" asp-validation-for="UserName"></span>
+          <input type="text" asp-for="UserName" placeholder="Введите ваше имя" class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label class="" asp-for="Phone"></label>
+          <span class="text-danger" asp-validation-for="Phone"></span>
+          <input type="text" asp-for="Phone" placeholder="Введите номер телефона" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label class="" asp-for="Region"></label>
+          <span class="text-danger" asp-validation-for="Region"></span>
+          <select asp-for="Region" class="form-control">
+                <option value="">Выберите регион</option>
+                <option value="Ташкент">Ташкент</option>
+                <option value="Фергана">Фергана</option>
+                <option value="Андижан">Андижан</option>
+                <option value="Наманган">Наманган</option>
+                <option value="Ташкентскаяобл">Ташкентская область</option>
+                <option value="Сырдарья">Сырдарья</option>
+                <option value="Джизак">Джизак</option>
+                <option value="Самарканд">Самарканд</option>
+                <option value="Навои">Навои</option>
+                <option value="Кашкадарья">Кашкадарья</option>
+                <option value="Сурхандарья">Сурхандарья</option>
+                <option value="Бухара">Бухара</option>
+                <option value="Хорезм">Хорезм</option>
+                <option value="Каракалпакстан">Каракалпакстан</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label class="" asp-for="Address"></label>
+          <span class="text-danger" asp-validation-for="Address"></span>
+          <input type="text" asp-for="Address" placeholder="Введите адресс" class="form-control">
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <label class="" asp-for="ProductName"></label>
+          <span class="text-danger" asp-validation-for="ProductName"></span>
+          <input type="text" asp-for="ProductName"  class="form-control">
+        </div>
+        <div class="col-md-6">
+          <label class="" asp-for="ProductCount"></label>
+          <span class="text-danger" asp-validation-for="ProductCount"></span>
+          <input type="text" asp-for="ProductCount" class="form-control">
+        </div>
+      </div>
+      <div class="row floatright" style="margin-top:10px">
+          <div class="col-md-4" style="margin-left:30px">
+              <input type="submit" class="btn btn-success" value="Заказать" />
+          </div>
+          <div class="col-md-4" style="margin-left:25px">
+              <a asp-controller="Products" asp-action="Index" class="btn btn-warning">Отмена</a>
+          </div>
+      </div>
+    </form>
+</div>

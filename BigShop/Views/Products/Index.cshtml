@@ -1,0 +1,260 @@
+﻿@model ProductListVM
+<head>
+    <title>DianUz online shop</title>
+</head>
+<div class="slider-area">
+    <div class="zigzag-bottom"></div>
+    <div id="slide-list" class="carousel carousel-fade slide" data-ride="carousel">
+        <div class="slide-bulletz">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <ol class="carousel-indicators slide-indicators">
+                            <li data-target="#slide-list" data-slide-to="0" class="active"></li>
+                            <li data-target="#slide-list" data-slide-to="1"></li>
+                            <li data-target="#slide-list" data-slide-to="2"></li>
+                        </ol>                            
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <div class="single-slide">
+                    <div class="slide-bg slide-one"></div>
+                    <div class="slide-text-wrapper">
+                        <div class="slide-text">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-6">
+                                        <div class="slide-content">
+                                            <h2>О нас</h2>
+                                            <p>Главное преимущество нашей компании, которая занимается продажей товаров в Узбекистане – многолетний опыт работы и заслуженное доброе имя.</p>
+                                            <p>С момента своего развития интернет-магазин DinaUzOnline и его команда 
+                                                неустанно следит за тенденциями спроса потребительского рынка, что дает нам возможность всегда быть в курсе самых последних 
+                                                технологий и инновационных решений.
+                                            </p>
+                                            <a href="" class="readmore">Интересно?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="single-slide">
+                    <div class="slide-bg slide-two"></div>
+                    <div class="slide-text-wrapper">
+                        <div class="slide-text">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-6">
+                                        <div class="slide-content">
+                                            <h2>Не равнодушность</h2>
+                                            <p>Специалисты компании внимательно изучают желания наших клиентов, поэтому ресурс постоянно обновляется качественными новинками, имеющими доступную стоимость!</p>
+                                            <a href="" class="readmore">Интересно?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="item">
+                <div class="single-slide">
+                    <div class="slide-bg slide-three"></div>
+                    <div class="slide-text-wrapper">
+                        <div class="slide-text">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-6 col-md-offset-6">
+                                        <div class="slide-content">
+                                            <h2>Наше будущие</h2>
+                                            <p>Компания DinaUzOnline стремительно прорабатывает все свои возможности, и сегодня мы предлагаем своим клиентам значительные скидки и быструю доставку в ряды городов.</p>
+                                            <a href="" class="readmore">Интересно?</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
+</div> <!-- End slider area -->
+    
+<div class="promo-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo">
+                    <i class="fa fa-refresh"></i>
+                    <p>Возврат 30 дней</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo">
+                    <i class="fa fa-truck"></i>
+                    <p>Бесплатная доставка</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo">
+                    <i class="fa fa-lock"></i>
+                    <p>Безопастность</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="single-promo">
+                    <i class="fa fa-gift"></i>
+                    <p>Новые товары</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End promo area -->
+    
+<div class="maincontent-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="latest-product">
+                    <h2 class="section-title">Наши товары</h2>
+                    <div class="product-carousel">
+                        @foreach(var product in Model.Products)
+                        {
+                            string productImg = "/productImg/" + product.ProductImgFileName;
+                            <div class="single-product">
+                                <div class="product-f-image">
+                                    <img src="@productImg" alt="">
+                                    <div class="product-hover">
+                                        <a asp-action="Details" asp-route-productId="@product.ProductId" class="view-details-link"><i class="fa fa-link"></i>Подробнее</a>
+                                    </div>
+                                </div>
+                                
+                                <h2><a asp-action="Details" asp-route-productId="@product.ProductId">@product.ProductName</a></h2>
+                                
+                                <div class="product-carousel-price">
+                                    <ins>@product.Price сум</ins>
+                                </div>
+                                <a asp-controller="Orders" asp-action="AddOrder" asp-route-productId="@product.ProductId" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Заказать</a>
+                            </div>
+                        }
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End main content area -->
+    
+<div class="brands-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="brand-wrapper">
+                    <h2 class="section-title">Brands</h2>
+                    <div class="brand-list">
+                        <img src="img/services_logo__1.jpg" alt="">
+                        <img src="img/services_logo__2.jpg" alt="">
+                        <img src="img/services_logo__3.jpg" alt="">
+                        <img src="img/services_logo__4.jpg" alt="">
+                        <img src="img/services_logo__1.jpg" alt="">
+                        <img src="img/services_logo__2.jpg" alt="">
+                        <img src="img/services_logo__3.jpg" alt="">
+                        <img src="img/services_logo__4.jpg" alt="">                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End brands area -->
+    
+<div class="product-widget-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Для дома</h2>
+                    <a asp-action="ProductsByCategory" asp-route-categoryId="A1E40BD4-248B-4A0F-80FE-BF13A9E6F769" class="wid-view-more">Показать все</a>
+                    @foreach(var product in Model.Products.Take(4))
+                    {
+                        string imgPath = "/productImg/" + product.ProductImgFileName;
+                        <div class="single-wid-product">
+                            <a href="single-product.html"><img src="@imgPath" alt="" class="product-thumb"></a>
+                            <h2><a href="single-product.html">@product.ProductName</a></h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>@product.Price сум</ins>
+                            </div>                            
+                        </div>
+                    }
+                    
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Для машины</h2>
+                    <a asp-action="ProductsByCategory" asp-route-categoryId="03F8423E-F330-493B-AFC7-823ABA2B9A8A" class="wid-view-more">Показать все</a>
+                    @foreach(var product in Model.Products.Take(4))
+                    {
+                        string imgPath = "/productImg/" + product.ProductImgFileName;
+                        <div class="single-wid-product">
+                            <a href="single-product.html"><img src="@imgPath" alt="" class="product-thumb"></a>
+                            <h2><a href="single-product.html">@product.ProductName</a></h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>@product.Price сум</ins>
+                            </div>                            
+                        </div>
+                    }
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="single-product-widget">
+                    <h2 class="product-wid-title">Топ новые</h2>
+                    <a href="#" class="wid-view-more">Показать все</a>
+                    @foreach(var product in Model.Products.Take(4))
+                    {
+                        string imgPath = "/productImg/" + product.ProductImgFileName;
+                        <div class="single-wid-product">
+                            <a href="single-product.html"><img src="@imgPath" alt="" class="product-thumb"></a>
+                            <h2><a href="single-product.html">@product.ProductName</a></h2>
+                            <div class="product-wid-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <div class="product-wid-price">
+                                <ins>@product.Price сум</ins>
+                            </div>                            
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div> <!-- End product widget area -->

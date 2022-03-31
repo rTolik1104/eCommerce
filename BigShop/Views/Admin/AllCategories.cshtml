@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Categories>
+
+@{
+    Layout = "_AdminLAyout";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+        <h1 class="m-0">Категории</h1>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+<div class="card">
+    <div class="card-header border-transparent">
+        <h3 class="card-title">Категории</h3>
+        <a asp-controller="Admin" asp-action="Index" class="btn btn-success float-right">Добавить</a>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table m-0">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Названия</th>
+                        <th>Действия</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var category in Model)
+                    {
+                        <tr>
+                            <td>@category.CategoryId</td>
+                            <td>@category.CategoryName</td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="Index" class="btn btn-sm btn-primary"><i class="bi bi-clipboard2-fill"></i> Подробнее</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    <!-- /.table-responsive -->
+    </div>
+    <!-- /.card-footer -->
+</div>
+

@@ -1,0 +1,148 @@
+﻿@model IndexVM
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<!-- Content Wrapper. Contains page content -->
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0">Главная</h1>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>@Model.ProductsCount</h3>
+
+                <p>Товары</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a asp-action="AllProducts" class="small-box-footer">Подробнее <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-success">
+              <div class="inner">
+                <h3>@Model.OrdersCount</h3>
+
+                <p>Заказы</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a asp-action="AllOrders" class="small-box-footer">Подробнее <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3>44</h3>
+
+                <p>О нас</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">Подробнее <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3>@Model.CategoriesCount</h3>
+
+                <p>Категории</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a asp-action="AllCategories" class="small-box-footer">Подробнее <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+        </div>
+        <!-- /.row -->
+        <!-- Main row -->
+        <!-- TABLE: LATEST ORDERS -->
+        @foreach(var order in Model.Orders)
+        {
+            <div class="card">
+                <div class="card-header border-transparent">
+                    <h3 class="card-title">Последние заказы</h3>
+                </div>
+              <!-- /.card-header -->
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table m-0">
+                            <thead>
+                                <tr>
+                                  <th>Имя</th>
+                                  <th>Телефое</th>
+                                  <th>Регион</th>
+                                  <th>Дата заказа</th>
+                                  <th>Статус</th>
+                                  <th>Действия</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@order.UserName</td>
+                                    <td>@order.Phone</td>
+                                    <td>@order.Region</td>
+                                    <td>@order.CreatedDate</td>
+                                    <td>
+                                        @if (order.IsComplete==true)
+                                        {
+                                            <a class="badge badge-success">Выполнено</a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Admin" asp-action="Complete" asp-route-orderId="@order.OrderId" onclick="return confirm("Вы точно хотите изменить статус заказа?")" class="btn btn-sm btn-warning">Не выполнено</a>
+                                        }
+                                    </td>
+                                    <td>
+                                        <a asp-controller="Admin" asp-action="OrderDetails" asp-route-orderId="order.OrderId" class="btn btn-sm btn-primary"><i class="bi bi-clipboard2-fill"></i> Подробнее</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                <!-- /.table-responsive -->
+                </div>
+              <!-- /.card-body -->
+              <div class="card-footer clearfix">
+                <a asp-action="AllOrders" class="btn btn-sm btn-secondary float-right">Показать все</a>
+              </div>
+              <!-- /.card-footer -->
+            </div> 
+        }
+            
+            <!-- /.card -->
+        <!-- /.row (main row) -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  <!-- /.content-wrapper -->
+

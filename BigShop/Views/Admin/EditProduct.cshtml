@@ -1,0 +1,65 @@
+﻿@model EditProductVM
+
+@{
+    Layout = "_AdminLayout";
+    string imgPath = "/productImg/" + Model.ImgFileName;
+}
+
+<div class="row">
+    <div class="col-md-8" style="margin-left:25px">
+        <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Изменить товар</h3>
+        </div>
+        <form asp-action="EditProduct" method="post" enctype="multipart/form-data">
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="ProductName"></label>
+                    <span class="text-danger" asp-validation-for="ProductName"></span>
+                    <input asp-for="ProductName" type="text" id="inputName" class="form-control">
+                </div>
+                <input type="hidden" asp-for="ProductId" />
+                <div class="form-group">
+                    <label asp-for="ProductDescription"></label>
+                    <span class="text-danger" asp-validation-for="ProductDescription"></span>
+                    <textarea asp-for="ProductDescription" id="inputDescription" class="form-control" rows="4"></textarea>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId"></label>
+                    <span class="text-danger" asp-validation-for="CategoryId"></span>
+                    <select asp-for="CategoryId" asp-items="ViewBag.Categories" class="form-control custom-select"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Enabled"></label>
+                    <span class="text-danger" asp-validation-for="CategoryId"></span>
+                    <select asp-for="Enabled" class="form-control custom-select">
+                        <option>Да</option>
+                        <option>Нет</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Price"></label>
+                    <span class="text-danger" asp-validation-for="Price"></span>
+                    <input asp-for="Price" type="text" id="inputClientCompany" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label asp-for="ImgFileName"></label>
+                    <img src="@imgPath" style="width:450px;height:400px"/>
+                </div>
+                <input type="hidden" asp-for="ImgFileName" />
+                <div class="form-group">
+                    <label asp-for="ImgFile"></label>
+                    <span class="text-danger" asp-validation-for="ImgFile"></span>
+                    <input asp-for="ImgFile" type="file" id="inputProjectLeader" class="form-control">
+                </div>
+                <div class="form-group">
+                    <a href="#" class="btn btn-secondary">Отмена</a>
+                    <input type="submit" value="Обновить" class="btn btn-success float-right">
+                </div>
+            </div>
+        </form>
+        <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>

@@ -1,0 +1,43 @@
+﻿@model ProductListVM
+
+<head>
+    <title>By Category</title>
+</head>
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>@ViewBag.Category</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="single-product-area">
+    <div class="zigzag-bottom"></div>
+    <div class="container">
+        <div class="row">
+            @foreach(var product in Model.Products)
+            {
+                string productImg = "/productImg/" + product.ProductImgFileName;
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-shop-product">
+                        <div class="product-upper">
+                            <img src="@productImg" alt="">
+                        </div>
+                        <h2><a href="">@product.ProductName</a></h2>
+                        <div class="product-carousel-price">
+                            <ins>@product.Price сум</ins>
+                        </div>  
+                        
+                        <div class="product-option-shop">
+                            <a class="add_to_cart_button" asp-controller="Orders" asp-action="AddOrder" asp-route-productId="@product.ProductId">Заказать</a>
+                        </div>                       
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,55 @@
+﻿@model ProductListVM
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+        <h1 class="m-0">Просмотор товаров</h1>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+
+<div class="card">
+    <div class="card-header border-transparent">
+        <h3 class="card-title">Товары</h3>
+        <a asp-controller="Admin" asp-action="AddProduct" class="btn btn-success float-right">Добавить</a>
+    </div>
+    <!-- /.card-header -->
+
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table m-0">
+                    <thead>
+                        <tr>
+                            <th>Названия</th>
+                            <th>Цена</th>
+                            <th>Категория</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach(var product in Model.Products)
+                        {
+                            <tr>
+                                <td>@product.ProductName</td>
+                                <td>@product.Price сум</td>
+                                <td>@product.ProductCategory</td>
+                                <td>
+                                    <a asp-controller="Admin" asp-action="EditProduct" asp-route-productId="@product.ProductId" class="btn btn-warning"><i class="bi bi-pencil-square"></i> Изменить</a> |
+                                    <a asp-controller="Admin" asp-action="DeleteProduct" asp-route-productId="@product.ProductId" onclick="return confirm("Вы точно хотите удалить?")" class="btn btn-danger"><i class="bi bi-trash"></i> Удалить</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        <!-- /.table-responsive -->
+        </div>
+</div>
+

@@ -1,0 +1,65 @@
+﻿@model OrderListVM
+
+@{
+    Layout = "_AdminLayout";
+}
+<div class="content-header">
+    <div class="container-fluid">
+    <div class="row mb-2">
+        <div class="col-sm-6">
+        <h1 class="m-0">Просмотор заказов</h1>
+        </div><!-- /.col -->
+    </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+
+@foreach(var order in Model.Orders)
+{
+    <div class="card">
+        <div class="card-header border-transparent">
+            <h3 class="card-title">Заказы</h3>
+            <a asp-controller="Admin" asp-action="DeleteOrders" class="btn btn-danger float-right">Удалить все записи!</a>
+        </div>
+        <!-- /.card-header -->
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table m-0">
+                    <thead>
+                        <tr>
+                            <th>Имя</th>
+                            <th>Телефое</th>
+                            <th>Регион</th>
+                            <th>Дата заказа</th>
+                            <th>Статус</th>
+                            <th>Действия</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@order.UserName</td>
+                            <td>@order.Phone</td>
+                            <td>@order.Region</td>
+                            <td>@order.CreatedDate</td>
+                            <td>
+                                @if (order.IsComplete==true)
+                                {
+                                    <a class="badge badge-success">Выполнено</a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="Admin" asp-action="Complete" asp-route-orderId="@order.OrderId" onclick="return confirm("Вы точно хотите изменить статус заказа?")" class="btn btn-sm btn-warning">Не выполнено</a>
+                                }
+                            </td>
+                            <td>
+                                <a asp-controller="Admin" asp-action="OrderDetails" asp-route-orderId="@order.OrderId" class="btn btn-sm btn-primary"><i class="bi bi-clipboard2-fill"></i> Подробнее</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        <!-- /.table-responsive -->
+        </div>
+        <!-- /.card-footer -->
+    </div>
+}
+

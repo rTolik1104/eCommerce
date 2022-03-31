@@ -1,0 +1,55 @@
+﻿@model ProductVM
+
+<head>
+    <title>Details</title>
+</head>
+@{
+    string imgPath = "/productImg/" + @Model.ProductImgFileName;
+}
+
+<div class="product-big-title-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="product-bit-title text-center">
+                    <h2>@Model.ProductName</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container" style="margin-top:25px">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="product-images">
+                <div class="product-main-img">
+                    <img src="@imgPath" alt="">
+                </div>
+            </div>
+        </div>
+        <div class="product-inner">
+            <h2 class="product-name">@Model.ProductName</h2>
+            <div class="product-inner-price">
+                <ins>@Model.Price</ins>
+            </div>    
+            <a asp-controller="Orders" asp-action="AddOrder" asp-route-productId="@Model.ProductId" class="add_to_cart_button">Заказать</a>                       
+                                    
+            <div class="product-inner-category">
+                <p>Category: @ViewBag.Category </p>
+            </div> 
+                                    
+            <div role="tabpanel">
+                <ul class="product-tab" role="tablist">
+                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Описание</a></li>
+                </ul>
+                <div class="tab-content">
+                    <div role="tabpanel" class="tab-pane fade in active" id="home">
+                        <h2>Описание</h2>  
+                        <p>@Model.ProductDescription</p>
+                    </div>
+                </div>
+            </div>                       
+        </div>
+    </div>
+</div>
+                        

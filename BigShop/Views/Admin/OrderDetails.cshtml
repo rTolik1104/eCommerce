@@ -1,0 +1,49 @@
+﻿@model OrderVM
+
+@{
+    Layout = "_AdminLayout";
+}
+
+<div class="row">
+    <div class="col-md-8" style="margin-left:25px">
+        <div class="card card-primary">
+        <div class="card-header">
+            <h3 class="card-title">Информация заказа</h3>
+        </div>
+        <form asp-action="Complete" method="post" asp-route-orderId="@Model.OrderId">
+            <div class="card-body">
+                <div class="form-group">
+                    <label asp-for="UserName"></label>
+                    <input asp-for="UserName" type="text" id="inputName" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Phone"></label>
+                    <input asp-for="Phone" type="text" id="inputName" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Region"></label>
+                    <input asp-for="Region" type="text" id="inputName" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Address"></label>
+                    <textarea asp-for="Address" id="inputDescription" class="form-control" rows="4" readonly></textarea>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductName"></label>
+                    <input asp-for="ProductName" type="text" id="inputClientCompany" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProductCount"></label>
+                    <input asp-for="ProductCount" type="text" id="inputProjectLeader" class="form-control" readonly>
+                </div>
+                <div class="form-group">
+                    <a asp-controller="Admin" asp-action="AllOrders" class="btn btn-secondary">Отмена</a>
+                    <input type="submit" value="Выполнить" class="btn btn-success float-right">
+                </div>
+            </div>
+        </form>
+        <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
