@@ -15,6 +15,6 @@ namespace BigShop.Data.Interfaces
         public Task DeleteAsync(Guid productId);
         public Task IsEnabled(Guid productId);
         public string SaveImg(IFormFile formFile);
-        public void DeleteProductImg(IFormFile formFile);
+        public void DeleteProductImg(string FileName);
     }
 }

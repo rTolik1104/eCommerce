@@ -11,14 +11,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BigShop.Controllers
 {
-    [Authorize(Roles ="Admin")]
+    [Authorize(Roles = "Admin")]
     public class AdminController : Controller
     {
         private readonly IProductServices _productServices;
         private readonly IOrderServices _orderServices;
         private readonly AppDbContext _appDbContext;
 
-        public AdminController(IProductServices productServices, IOrderServices orderServices,AppDbContext appDbContext)
+        public AdminController(IProductServices productServices, IOrderServices orderServices, AppDbContext appDbContext)
         {
             _orderServices = orderServices;
             _productServices = productServices;
@@ -29,7 +29,7 @@ namespace BigShop.Controllers
         {
             var products = await _productServices.GetAllProductsAsync();
             var orders = await _orderServices.GetAllOrdersAsync();
-            var categories=await _productServices.GetCategoriesAsync();
+            var categories = await _productServices.GetCategoriesAsync();
             var orderList = orders.Select(x => new OrderVM
             {
                 UserName = x.UserName,
@@ -41,10 +41,10 @@ namespace BigShop.Controllers
 
             var model = new IndexVM
             {
-                Orders = orderList.OrderByDescending(x=>x.OrderId).Take(10),
+                Orders = orderList.OrderByDescending(x => x.OrderId).Take(10),
                 ProductsCount = products.Count(),
                 OrdersCount = orders.Count(),
-                CategoriesCount=categories.Categories.Count()
+                CategoriesCount = categories.Categories.Count()
             };
             return View(model);
         }
@@ -61,7 +61,7 @@ namespace BigShop.Controllers
                 ProductDescription = x.ProductDescription,
                 ProductImgFileName = x.ImgPath,
                 Price = x.ProductPrice,
-                ProductCategory = categories.Categories.Where(c=>c.CategoryId==x.CategoryId).First().CategoryName,
+                ProductCategory = categories.Categories.Where(c => c.CategoryId == x.CategoryId).First().CategoryName,
                 Enabled = x.Enabled,
             });
 
@@ -79,7 +79,7 @@ namespace BigShop.Controllers
 
             var orderList = orders.Select(x => new OrderVM
             {
-                OrderId=x.OrderId,
+                OrderId = x.OrderId,
                 UserName = x.UserName,
                 Phone = x.Phone,
                 Region = x.Region,
@@ -126,7 +126,7 @@ namespace BigShop.Controllers
                     ProductPrice = model.Price,
                     CategoryId = model.CategoryId,
                     ImgPath = _productServices.SaveImg(model.ImgFile),
-                    Enabled=true
+                    Enabled = true
                 };
 
                 await _productServices.AddAsync(product);
@@ -139,7 +139,6 @@ namespace BigShop.Controllers
             return View(model);
         }
 
-        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> EditProduct(Guid productId)
         {
             var product = await _productServices.GetProductByIdAsync(productId);
@@ -177,6 +176,7 @@ namespace BigShop.Controllers
             return View(model);
         }
 
+        //Prepare Product model
         private Products BuilEditProduct(EditProductVM model)
         {
             var product = new Products
@@ -189,6 +189,7 @@ namespace BigShop.Controllers
             };
             if (model.ImgFile != null)
             {
+                _productServices.DeleteProductImg(product.ImgPath);
                 product.ImgPath = _productServices.SaveImg(model.ImgFile);
             }
             else

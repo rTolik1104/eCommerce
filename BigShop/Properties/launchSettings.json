@@ -15,7 +15,7 @@
       "launchUrl": "Products",
       "applicationUrl": "http://localhost:5233;https://localhost:7233",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     },
     "IIS Express": {
@@ -23,7 +23,7 @@
       "launchBrowser": true,
       "launchUrl": "Products",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Production"
       }
     }
   }

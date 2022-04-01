@@ -41,6 +41,7 @@ namespace BigShop.Data.Services
                 if (productId != null)
                 {
                     var product = await GetProductByIdAsync(productId);
+                    DeleteProductImg(product.ImgPath);
                     _appDbContext.Products.Remove(product);
                     await _appDbContext.SaveChangesAsync();
                 }
@@ -140,10 +141,10 @@ namespace BigShop.Data.Services
             }
             return uniqName;
         }
-        public void DeleteProductImg(IFormFile formFile)
+        public void DeleteProductImg(string ImgFileName)
         {
             string uploadFolder = Path.Combine(_webHost.WebRootPath, "productImg");
-            string filePath = Path.Combine(uploadFolder, formFile.FileName);
+            string filePath = Path.Combine(uploadFolder, ImgFileName);
             FileInfo fileInfo = new FileInfo(filePath);
             if (fileInfo.Exists)
             {
@@ -156,17 +157,6 @@ namespace BigShop.Data.Services
         {
             try
             {
-                //var product = await GetProductByIdAsync(newProduct.ProductId);
-
-                //if(product != null)
-                //{
-                //    product.ProductName = newProduct.ProductName;
-                //    product.ProductDescription = newProduct.ProductDescription;
-                //    product.CategoryId = newProduct.CategoryId;
-                //    product.ProductPrice = newProduct.ProductPrice;
-                //    product.ImgPath = newProduct.ImgPath;
-                //    product.Enabled = newProduct.Enabled;
-                //}
                 _appDbContext.Update(newProduct);
                 await _appDbContext.SaveChangesAsync();
             }

@@ -38,6 +38,7 @@ namespace BigShop.Data.Services
                 {
                     _appDbContext.Orders.Remove(order);
                 }
+                _logger.LogInformation("All orders removed!");
                 await _appDbContext.SaveChangesAsync();
             }
             catch (Exception ex)

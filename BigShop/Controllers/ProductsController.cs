@@ -11,7 +11,7 @@ namespace BigShop.Controllers
         private readonly IProductServices _productServices;
         private readonly AppDbContext _dbContext;
 
-        public ProductsController(IProductServices productServices,AppDbContext dbContext)
+        public ProductsController(IProductServices productServices, AppDbContext dbContext)
         {
             _productServices = productServices;
             _dbContext = dbContext;
