@@ -21,20 +21,23 @@
             @foreach(var product in Model.Products)
             {
                 string productImg = "/productImg/" + product.ProductImgFileName;
-                <div class="single-product">
-                    <div class="product-f-image">
-                        <img src="@productImg" alt="">
-                        <div class="product-hover">
-                            <a asp-action="Details" asp-route-productId="@product.ProductId" class="view-details-link"><i class="fa fa-link"></i>Подробнее</a>
+                <div class="col-md-3 col-sm-6">
+                    <div class="single-shop-product">
+                        <div class="product-f-image">
+                            <img src="@productImg" alt="">
+                            <div class="product-hover">
+                                <a asp-action="Details" asp-route-productId="@product.ProductId" class="view-details-link"><i class="fa fa-link"></i>Подробнее</a>
+                            </div>
                         </div>
-                    </div>
                                 
-                    <h2><a asp-action="Details" asp-route-productId="@product.ProductId">@product.ProductName</a></h2>
+                        <h2><a asp-action="Details" asp-route-productId="@product.ProductId">@product.ProductName</a></h2>
                                 
-                    <div class="product-carousel-price">
-                        <ins>@product.Price сум</ins>
+                        <div class="product-carousel-price">
+                            <ins>@product.Price сум</ins>
+                        </div>
+                        <br/>
+                        <a asp-controller="Orders" asp-action="AddOrder" asp-route-productId="@product.ProductId" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Заказать</a>
                     </div>
-                    <a asp-controller="Orders" asp-action="AddOrder" asp-route-productId="@product.ProductId" class="btn btn-success"><i class="fa fa-shopping-cart"></i> Заказать</a>
                 </div>
             }
         </div>
